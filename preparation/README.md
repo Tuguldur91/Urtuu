@@ -11,11 +11,44 @@ Six practice notebooks based on the station descriptions in `../urtuu.md`. These
 | [05 Mysterious graph](05_mysterious_graph.ipynb) | Routes, connectivity, Euler trails, coloring, trees, prerequisites, matching, stateful mazes |
 | [06 Finale](06_finale.ipynb) | Computing quiz, JavaScript traces, logic, SQL, networking, and verified file reconstruction |
 
-## Open and practice
+## Run offline with Python only
 
-Open the notebooks in JupyterLab, Jupyter Notebook, or an editor with notebook support and select a Python 3 kernel. Executable notebook cells use only Python's standard library. The Glitch notebook also contains JavaScript examples in Markdown: read them on paper or run them separately as described below. Your notebook application and kernel must already be installed before going offline. SVG illustrations and the audio player are embedded; `signal_practice.wav` is also provided for local playback and waveform analysis. Keep the folder together.
+All executable Python cells use the standard library. No `pip install`, downloads, or internet connection are needed to run them. The event guidelines specify an offline local network and organizer-provided computers; they do not list installed packages or say that preinstalled third-party packages are forbidden. This pack works without those packages.
 
-Run cells from top to bottom. Stop before the solutions and attempt the exercises on paper or in the provided work cell. Running all cells reveals solutions. Some viewers require trusting the notebook to render inline audio; the WAV works independently.
+From the repository root, use the existing virtual environment:
+
+```bash
+.venv/bin/python preparation/run_notebooks.py --write --show-output
+```
+
+Or run one station:
+
+```bash
+.venv/bin/python preparation/run_notebooks.py preparation/03_signal.ipynb --write --show-output
+```
+
+On a provided computer with Python 3.12 but no virtual environment, replace `.venv/bin/python` with its Python command, such as `python` or `python3`. The runner executes each notebook's Python cells from top to bottom, with separate state for each notebook. `--write` saves execution counts and outputs in the `.ipynb` files; `--show-output` also prints text results in the terminal. Omit `--write` to practice without overwriting saved outputs. A failed cell stops that notebook, clears its later outputs, and causes a nonzero exit status.
+
+The runner uses only built-in modules and supports the plain Python, printed output, final expressions, and SVG waveform used here. It is not a Jupyter kernel and does not execute JavaScript Markdown, IPython magics, or widgets. It executes notebook code, so use it only with trusted practice files.
+
+Useful standard-library modules for these exercises:
+
+| Station | Built-in tools |
+|---|---|
+| Decode | `base64`, `codecs`, `bytes.fromhex`, `int(text, base)` |
+| Log trace | `collections`, `re`, `datetime`, `json` |
+| Signal | `wave`, `struct`, `math`; SVG text instead of a plotting package |
+| Glitch | Ordinary Python functions, strings, lists, and sets; browser JavaScript is separate |
+| Mysterious graph | `collections.deque`, `heapq`, dictionaries, and sets |
+| Finale | `base64`, `hashlib`; `sqlite3` for optional SQL practice |
+
+## View notebooks and practice
+
+All Python cells have been run and their outputs saved, including the Signal waveform and solution answers. Open the notebooks in a notebook-capable editor to view the results. Interactive cell execution through Jupyter requires a notebook application and a Python kernel such as `ipykernel` to already be installed. A virtual environment alone does not provide that kernel; the command-line runner above does not need one.
+
+For a blind attempt, hide or clear saved outputs and stop before the solution section. The runner executes the solutions too. Exercise work cells containing only setup or comments may correctly have no output.
+
+SVG illustrations and the audio player are embedded; `signal_practice.wav` is also provided for local playback and waveform analysis. Keep the folder together. Some viewers require trusting the notebook to render inline audio; the WAV works independently. JavaScript examples in Glitch remain Markdown examples to run separately in a browser or JavaScript runtime as described below.
 
 ## Explore more station possibilities
 
